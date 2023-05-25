@@ -1,6 +1,6 @@
 # CSV Processor
 
-The CSV Processor is a robust and efficient tool designed to process, validate, and clean CSV files. It is written in Python and utilizes the powerful Pandas library to perform various data processing tasks. The objective is to make data processing more accessible to both non-technical users and seasoned data engineers.
+The CSV Processor is an efficient tool designed to process, validate, and clean CSV files. It is written in Python and utilizes the powerful Pandas library to perform various data processing tasks. The objective is to make data processing more accessible to both non-technical users and seasoned data engineers.
 
 ## Features
 
