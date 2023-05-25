@@ -51,7 +51,7 @@ When running the script, it configures the logging settings, defines the hardcod
 
 ## Conclusion
 
-The CSV Processor is a practical tool for processing CSV files, performing validation, and saving the results in an organized manner. It efficiently uses the Pandas library to provide a streamlined processing pipeline that is accessible to both non-technical users and junior data engineers. This tool ensures that the input data is validated and cleaned – which is an essential aspect of any data engineering pipeline.
+The CSV Processor is a practical tool for processing CSV files, performing validation, and saving the results in an organized manner. It efficiently uses the Pandas library to provide a streamlined processing pipeline that is accessible to both non-technical users and seasoned data engineers. This tool ensures that the input data is validated and cleaned – which is an essential aspect of any data engineering pipeline.
 
 ### Dependencies
 
@@ -65,7 +65,7 @@ To install dependencies, run the following command:
 pip install pandas chardet
 ```
 
-Please ensure the input, output, processed, and metadata folders are correctly set up before running the script. Happy processing!
+Please ensure the input folder is correctly set up before running the script. Happy processing!
 
 
 
