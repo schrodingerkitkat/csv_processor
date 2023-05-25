@@ -65,9 +65,15 @@ class CSVProcessor:
         pd.DataFrame
             Processed data.
         """
-        # Combine first
+        # Strip leading and trailing whitespace from column names
+        df.columns = df.columns.str.strip()
+
+        # Combine first and last names into a single column "full_name"
         df["full_name"] = df["first_name"] + " " + df["last_name"]
+
+        # Capitalize the first letter of each word in column names and replace underscores with spaces
         df.columns = [column.replace("_", " ").title() for column in df.columns]
+
         return df
 
     def save_data(self, df: pd.DataFrame, file_name: str) -> None:
@@ -82,7 +88,10 @@ class CSVProcessor:
             Name of the original file.
         """
         _, filename = os.path.split(file_name)
-        df.to_csv(os.path.join(self.output_dir, filename), index=False)
+        new_file_path = os.path.join(self.output_dir, filename)
+        df.to_csv(new_file_path, index=False)
+
+        print(f"File {new_file_path} has been created successfully.")
 
     def validate_data(self, df: pd.DataFrame, file_name: str) -> Tuple[bool, dict]:
         """
@@ -113,9 +122,11 @@ class CSVProcessor:
             - duplicates: Count of duplicate records found in the data.
         """
         validation_report = {}
-        df.columns = (
-            df.columns.str.lower().str.replace(" ", "_").str.strip()
-        )  # standardizing column names
+
+        # Standardize column names: Remove leading/trailing whitespaces, lower case everything,
+        # Replace all consecutive spaces (even in middle of the words) with a single underscore.
+        df.columns = df.columns.str.strip().str.lower().str.replace(r"\s+", "_", regex=True)
+        
         required_columns = set(["first_name", "last_name", "age"])
 
         if not required_columns.issubset(df.columns):
@@ -227,6 +238,7 @@ class CSVProcessor:
         with open(metadata_file, "w") as f:
             json.dump(metadata, f, indent=4)
 
+
     def process_all_files(self):
         """
         Process all CSV files in the input directory.
@@ -280,7 +292,7 @@ class CSVProcessor:
                     )
                 else:
                     error_messages.append("File failed validation.")
-                    new_file_path = self.move_and_rename_file(file_path, self.error_dir)
+                    new_file_path = file_path
 
                 if validation_report:
                     error_messages.append(str(validation_report))
@@ -303,7 +315,7 @@ class CSVProcessor:
                     f"{file_path}: Unexpected error occurred during processing. {str(e)}"
                 )
 
-        self.save_metadata_collection(metadata_collection)
+
 
         # Return a DataFrame that concatenates all processed data
         return pd.concat(dataframes, ignore_index=True)
