@@ -1,0 +1,8 @@
+{
+    "file_name": "./processed/20230524134718_some.csv",
+    "processed_time": "2023-05-24 13:47:18",
+    "num_records": 3,
+    "validation_report": {
+        "duplicates": 0
+    }
+}

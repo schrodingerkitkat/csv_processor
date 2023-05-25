@@ -1,0 +1,8 @@
+{
+    "file_name": "./processed/20230524133031_20230524132610_20230524004958_20230524004646_23230731_file.csv",
+    "processed_time": "2023-05-24 13:30:31",
+    "num_records": 3,
+    "validation_report": {
+        "duplicates": 0
+    }
+}
