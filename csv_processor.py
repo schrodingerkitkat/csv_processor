@@ -127,35 +127,42 @@ class CSVProcessor:
         # Replace all consecutive spaces (even in middle of the words) with a single underscore.
         df.columns = df.columns.str.strip().str.lower().str.replace(r"\s+", "_", regex=True)
         
+        
         required_columns = set(["first_name", "last_name", "age"])
 
+        # Check if all required columns are present
         if not required_columns.issubset(df.columns):
             validation_report["missing_required_columns"] = list(
                 required_columns.difference(df.columns)
             )
             return False, validation_report
 
+        # Check if there are any extra columns. This should not be a cause for rejection.
         if set(df.columns) > required_columns:
             df = df.loc[:, df.columns.isin(required_columns)]
             validation_report["extra_columns"] = list(
                 set(df.columns).difference(required_columns)
             )
 
+        # Check for missing values
         if df[["first_name", "last_name"]].isnull().values.any():
             validation_report["missing_values"] = list(
                 df[["first_name", "last_name"]].isnull().sum()
             )
 
+        # Check for invalid age values
         if not df["age"].astype(str).str.isdigit().all():
             validation_report["non_integer_age"] = df.loc[
                 ~df["age"].astype(str).str.isdigit(), "age"
             ].values.tolist()
 
+        # Check for age outliers
         if (df["age"] < 0).any() or (df["age"] > 120).any():
             validation_report["age_outliers"] = df.loc[
                 (df["age"] < 0) | (df["age"] > 120), "age"
             ].values.tolist()
 
+        # Check for duplicate records
         if df.duplicated().any():
             duplicate_count = df.duplicated().sum()
             df.drop_duplicates(inplace=True)
