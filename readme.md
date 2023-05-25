@@ -1,6 +1,6 @@
 # CSV Processor
 
-The CSV Processor is a robust and efficient tool designed to process, validate, and clean CSV files. It is written in Python and utilizes the powerful Pandas library to perform various data processing tasks. The objective is to make data processing more accessible to both non-technical users and junior data engineers who are new to the field.
+The CSV Processor is a robust and efficient tool designed to process, validate, and clean CSV files. It is written in Python and utilizes the powerful Pandas library to perform various data processing tasks. The objective is to make data processing more accessible to both non-technical users and seasoned data engineers.
 
 ## Features
 
@@ -47,15 +47,7 @@ The primary method to process and validate data is `process_all_files()`. It con
 
 When running the script, it configures the logging settings, defines the hardcoded directory paths for input, output, processed, and metadata folders, and instantiates the `CSVProcessor` class with the specified directories. The `processor.process_all_files()` method is then called to process all files in the input folder.
 
-## Learning Objectives for Junior Data Engineers
 
-Junior data engineers can learn the following from this CSV Processor solution:
-
-1. Handling file paths and folders using the `os` and `shutil` libraries.
-2. Reading and writing CSV files using the Pandas library. The code demonstrates how to use `pd.read_csv()` and `pd.DataFrame.to_csv()` functions for reading and writing CSV files, respectively.
-3. Validating a Pandas DataFrame using various techniques, such as checking for missing values in columns, ensuring columns have correct data types (e.g., ensuring ages are integers), identifying outliers, and detecting duplicate rows.
-4. Processing data using Pandas by performing column-wise operations, column renaming, and filtering in a DataFrame.
-5. Logging relevant information and error messages throughout the file processing pipeline, with appropriate log levels (INFO and ERROR).
 
 ## Conclusion
 
